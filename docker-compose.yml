@@ -1,0 +1,45 @@
+# Network Anomaly Detector
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: nad-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - db-data:/app/data
+    environment:
+      - DATABASE_PATH=/app/data/alerts.db
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - NETWORK_INTERFACE=
+    # NOTE: Packet capture requires host networking or privileged mode.
+    # For live capture, run the detector directly on the host instead.
+    # network_mode: host
+    # privileged: true
+    networks:
+      - nad-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: nad-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - nad-net
+
+volumes:
+  db-data:
+
+networks:
+  nad-net:
+    driver: bridge
+    

@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.control { @apply w-full rounded-lg border border-cyber-500 bg-cyber-900 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-400 outline-none focus:border-cyber-accent focus:ring-2 focus:ring-cyber-accent/40 disabled:cursor-not-allowed disabled:border-cyber-600 disabled:text-slate-400; }
+.action { @apply rounded-lg bg-cyan-300 px-3 py-2 text-sm font-bold text-cyber-900 shadow-sm outline-none hover:bg-cyan-200 focus:ring-2 focus:ring-cyan-100 focus:ring-offset-2 focus:ring-offset-cyber-800 disabled:cursor-not-allowed disabled:bg-cyber-600 disabled:text-slate-300; }
+
+@layer base {
+  body {
+    @apply bg-cyber-900 text-gray-100;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-cyber-800 border border-cyber-600 rounded-xl p-5 shadow-lg text-slate-100;
+  }
+  .stat-card {
+    @apply card flex flex-col gap-1;
+  }
+  .stat-value {
+    @apply text-3xl font-bold tracking-tight;
+  }
+  .stat-label {
+    @apply text-sm text-cyber-300 uppercase tracking-wider;
+  }
+  .severity-badge {
+    @apply px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wide;
+  }
+  .severity-CRITICAL {
+    @apply bg-red-900/60 text-red-300 border border-red-500/40;
+  }
+  .severity-HIGH {
+    @apply bg-red-900/40 text-red-400 border border-red-500/30;
+  }
+  .severity-MEDIUM {
+    @apply bg-yellow-900/40 text-yellow-400 border border-yellow-500/30;
+  }
+  .severity-LOW {
+    @apply bg-green-900/40 text-green-400 border border-green-500/30;
+  }
+  .status-NEW {
+    @apply bg-cyan-900/40 text-cyan-400;
+  }
+  .status-ACKNOWLEDGED {
+    @apply bg-yellow-900/40 text-yellow-400;
+  }
+  .status-RESOLVED {
+    @apply bg-green-900/40 text-green-400;
+  }
+  .table-row {
+    @apply border-b border-cyber-700/50 hover:bg-cyber-700/30 transition-colors cursor-pointer;
+  }
+  .ai-status {
+    @apply inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm font-semibold;
+  }
+  /* Provider retries are intentionally silent; only final results or failures are shown. */
+  .ai-status-running { @apply hidden; }
+  .ai-status-failed { @apply border-red-300/60 bg-red-950 text-red-100; }
+  .ai-result-grid { @apply grid grid-cols-1 gap-3 sm:grid-cols-2; }
+  .ai-result-block { @apply rounded-lg border border-cyber-600 bg-cyber-900/80 p-3; }
+  .ai-section-title { @apply mb-1 text-xs font-bold uppercase tracking-wider text-slate-300; }
+  .ai-link { @apply block break-all text-cyan-200 underline decoration-cyan-300/70 underline-offset-2 hover:text-cyan-100 focus:outline-none focus:ring-2 focus:ring-cyan-200; }
+  .assessment-badge { @apply inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-sm font-bold; }
+  .assessment-BENIGN { @apply border-emerald-300/70 bg-emerald-950 text-emerald-100; }
+  .assessment-SUSPICIOUS { @apply border-amber-300/70 bg-amber-950 text-amber-100; }
+  .assessment-MALICIOUS { @apply border-red-300/70 bg-red-950 text-red-100; }
+  .assessment-UNKNOWN, .assessment-INSUFFICIENT_EVIDENCE { @apply border-slate-300/60 bg-slate-800 text-slate-100; }
+}
